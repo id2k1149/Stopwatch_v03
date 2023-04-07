@@ -9,8 +9,6 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let circleView = UIView()
-    
     var digitalStartTime: TimeInterval?
     var timer: Timer?
     
@@ -27,8 +25,6 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        addView(using: circleView, size: 0.7, color: .cyan)
         
         addMinuteMarks()
         addHandLayer(handLayer: handLayer)
@@ -118,36 +114,6 @@ class ViewController: UIViewController {
 }
 
 extension UIViewController {
-    func addView(using subview: UIView, size: CGFloat, color: UIColor) {
-        
-        let minSize = min(view.frame.height, view.frame.width) * size
-        
-        view.addSubview(subview)
-        subview.backgroundColor = color
-        subview.translatesAutoresizingMaskIntoConstraints = false
-        
-        subview.widthAnchor.constraint(equalToConstant: minSize).isActive = true
-        subview.heightAnchor.constraint(equalTo: subview.widthAnchor).isActive = true
-        
-        subview.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        subview.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        let markSize = CGSize(width: 8, height: 2)
-        let markRadius = minSize / 2 - markSize.width
-
-        for i in 0..<60 {
-            let mark = UIView(frame: CGRect(origin: .zero, size: markSize))
-            let angle = CGFloat(i) / 60.0 * 2.0 * CGFloat.pi
-            mark.frame.size.width = i % 5 == 0 ? 16 : 8
-            let x = cos(angle) * markRadius + minSize / 2
-            let y = sin(angle) * markRadius + minSize / 2
-            mark.center = CGPoint(x: x, y: y)
-            mark.backgroundColor = UIColor.black
-            mark.transform = CGAffineTransform(rotationAngle: angle)
-            view.addSubview(mark)
-        }
-    }
-    
     
     func addMinuteMarks() {
   
@@ -209,5 +175,3 @@ extension UIViewController {
         view.addSubview(orangeCircle)
     }
 }
-
-
